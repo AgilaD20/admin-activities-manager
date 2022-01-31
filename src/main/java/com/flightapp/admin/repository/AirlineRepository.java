@@ -20,4 +20,12 @@ public interface AirlineRepository extends JpaRepository<Airline,Integer> {
 	@Query
 	Optional<Airline> findByAirlineName(String airlineName);
 
+	@Modifying
+	@Query(value="update airline set isblocked =1 where airlineName=:airlineName", nativeQuery=true)
+	void blockAirline(String airlineName);
+	
+	@Modifying
+	@Query(value="update airline set isblocked =0 where airlineName=:airlineName", nativeQuery=true)
+	void unblockAirline(String airlineName);
+
 }

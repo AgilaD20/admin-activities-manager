@@ -13,23 +13,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateFlightDTO {
+public class FlightSearchDTO {
 	
-private String flightName;
-	
-	private Integer availableSeats;
+    private String airlineName;
 	
 	private String fromLocation;
 	
 	private String destination;
-	
-	private Double price;
-	
-	private TripType tripType;
-	
-	private LocalDate departureDate;
-	
-	private String airlineName;
-
 
 }

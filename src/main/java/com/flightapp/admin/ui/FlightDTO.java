@@ -1,6 +1,6 @@
 package com.flightapp.admin.ui;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.flightapp.admin.model.TripType;
 
@@ -30,8 +30,8 @@ public class FlightDTO {
 	
 	private TripType tripType;
 	
-	private LocalDateTime departureTime;
+	private LocalDate departureDate;
 	
-	private LocalDateTime arrivalTime;
+
 
 }

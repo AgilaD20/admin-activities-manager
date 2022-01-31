@@ -16,16 +16,28 @@ import com.flightapp.admin.model.Flight;
 public interface FlightRepository extends JpaRepository<Flight,Integer> {
 	
 	
-	@Query(value="select * from flight where fromlocation=:fromLocation and destination=:destination and departuretime=:departure and arrivaltime=:arrival ",nativeQuery=true)
-	public List<Flight> getAllFlightByCriteria(String fromLocation, String destination, Date departure, Date arrival);
+	@Query(value="select * from flight where fromlocation=:fromLocation and destination=:destination and departuredate=:departure and isblocked=0",nativeQuery=true)
+	public List<Flight> getAllFlightByCriteria(String fromLocation, String destination, Date departure);
 	
 	@Modifying
-	@Query(value="udpate flight set availableseats=:availableSeats where flightid=:flightId ",nativeQuery=true)
+	@Query(value="update flight set availableseats=:availableSeats where flightid=:flightId ",nativeQuery=true)
 	public List<Flight> UpdateAvailableSeats(Integer availableSeats, Integer flightId);
 
 	@Query
 	public Optional<Flight> findByFlightName(String flightName);
 	
+	@Modifying
+	@Query(value="update flight set isblocked=1 where airlineid=:airlineid", nativeQuery=true)
+	public void blockFlightsByAirline(Integer airlineid);
 	
+	@Modifying
+	@Query(value="update flight set isblocked=0 where airlineid=:airlineid", nativeQuery=true)
+	public void unblockFlightsByAirline(Integer airlineid);
+	
+	@Query(value="select * from flight where airlineid=:airlineId", nativeQuery=true)
+	public List<Flight> getAllFlightsByAirlineid(Integer airlineId);
+
+	@Query(value="select * from flight where fromlocation=:fromLocation and destination=:destination and airlineid=:airlineId", nativeQuery=true)
+	public List<Flight> getAllFlightsByCriteriaWithAirline(Integer airlineId, String fromLocation, String destination);
 
 }

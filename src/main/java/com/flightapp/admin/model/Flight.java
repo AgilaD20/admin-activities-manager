@@ -1,5 +1,6 @@
 package com.flightapp.admin.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,10 +41,8 @@ public class Flight {
 	private Double price;
 	@Column(name="TRIPTYPE")
 	private TripType tripType;
-	@Column(name="DEPARTURETIME")
-	private LocalDateTime departureTime;
-	@Column(name="ARRIVALTIME")
-	private LocalDateTime arrivalTime;
+	@Column(name="DEPARTUREDATE")
+	private LocalDate departureDate;
 	@Column(name="ISBLOCKED")
 	private Boolean isBlocked;
 	/*

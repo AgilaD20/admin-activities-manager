@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ import com.flightapp.admin.ui.AirlineDTO;
 import com.flightapp.admin.ui.ApiResponse;
 import com.flightapp.admin.ui.CreateFlightDTO;
 import com.flightapp.admin.ui.FlightDTO;
+import com.flightapp.admin.ui.FlightSearchDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,8 +48,8 @@ public class AirlineController {
 		this.modelMapper = modelMapper;
 	}
 	
-	@GetMapping("/")
-	public ResponseEntity<List<Airline>> getAllAirlines()
+	@GetMapping("/allairlines")
+	public ResponseEntity<List<AirlineDTO>> getAllAirlines()
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(airlineService.getAllAirlines());
 	}
@@ -76,4 +79,37 @@ public class AirlineController {
 		airlineService.deleteAirline(airline);
 		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Airline was deleted succesfully"));
 	}
+	
+	@PutMapping("/blockairline/{airlineName:[a-zA-Z &+-]*}")
+	public ResponseEntity<ApiResponse> blockAirline(@Validated @PathVariable String airlineName)
+	{
+		airlineService.blockAirline(airlineName);
+		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Airline was blocked"));
+	}
+	
+	@PutMapping("/unblockairline/{airlineName:[a-zA-Z &+-]*}")
+	public ResponseEntity<ApiResponse> UnblockAirline(@Validated @PathVariable String airlineName)
+	{
+		airlineService.unblockAirline(airlineName);
+		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Airline was unblocked"));
+	}
+	
+	@GetMapping("/getFlights/{airlineName:[a-zA-Z &+-]*}")
+	public ResponseEntity<List<FlightDTO>> getAllFlightByAirlineName(@PathVariable String airlineName){
+		return ResponseEntity.status(HttpStatus.OK).body(flightService.getAllFlightByAirlineName(airlineName));
+	}
+	
+	@PostMapping("/searchschedule")
+	public ResponseEntity<List<FlightDTO>> getFlightsByCriteria(@RequestBody FlightSearchDTO flightSearchdto)
+	{
+		return ResponseEntity.status(HttpStatus.OK).body(flightService.getFlightsByCriteria(flightSearchdto));
+	}
+	
+	/*@PutMapping("/updateschedule")
+	public ResponseEntity<FlightDTO> updateFlightSchedule(@RequestBody FlightDTO flightDTO)
+	{
+		
+	}*/
+	
+	
 }

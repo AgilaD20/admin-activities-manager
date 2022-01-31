@@ -32,6 +32,8 @@ public class Airline {
 	private String contact;
 	@Column(name="LOGOURL")
 	private String logoUrl;
+	@Column(name="ISBLOCKED")
+	private Boolean isBlocked;
 	
 	@OneToMany(mappedBy="airline")
 	private List<Flight> flight;
