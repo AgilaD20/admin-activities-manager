@@ -1,10 +1,5 @@
 package com.flightapp.admin.ui;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.validation.constraints.Pattern;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

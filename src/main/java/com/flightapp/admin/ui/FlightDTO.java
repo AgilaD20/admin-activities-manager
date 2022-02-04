@@ -2,7 +2,9 @@ package com.flightapp.admin.ui;
 
 import java.time.LocalDate;
 
+
 import com.flightapp.admin.model.TripType;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,8 +17,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FlightDTO {
-	
-	
 	
 	private String flightName;
 	
@@ -31,6 +31,10 @@ public class FlightDTO {
 	private TripType tripType;
 	
 	private LocalDate departureDate;
+	
+	private LocalDate endDate;
+	
+	
 	
 
 

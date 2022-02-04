@@ -18,13 +18,6 @@ import com.flightapp.admin.model.Userentity;
 import com.flightapp.admin.repository.RoleRepository;
 import com.flightapp.admin.repository.UserRepository;
 
-/*
-import com.flightapp.user.Repository.RoleRepository;
-import com.flightapp.user.Repository.UserRepository;
-import com.flightapp.user.model.Privilege;
-import com.flightapp.user.model.Role;
-import com.flightapp.user.model.Userentity;
-*/
 
 @Service
 public class FlightUserDetails implements UserDetailsService {

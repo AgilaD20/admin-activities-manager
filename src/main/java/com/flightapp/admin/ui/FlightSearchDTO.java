@@ -1,9 +1,5 @@
 package com.flightapp.admin.ui;
 
-import java.time.LocalDate;
-
-import com.flightapp.admin.model.TripType;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

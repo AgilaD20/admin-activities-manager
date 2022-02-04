@@ -1,8 +1,10 @@
 package com.flightapp.admin.ui;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.flightapp.admin.model.TripType;
+import com.flightapp.admin.model.scheduleDays;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +31,11 @@ private String flightName;
 	
 	private LocalDate departureDate;
 	
+	private LocalDate endDate;
+	
 	private String airlineName;
+	
+	private List<scheduleDays> requestedSchedule;
 
 
 }

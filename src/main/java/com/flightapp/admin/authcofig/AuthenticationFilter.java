@@ -25,50 +25,40 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
-	
+
 	private final JWTutil jwtutil;
-	
+
 	private final FlightUserDetails userDetailsService;
-	
-	
-@Autowired
+
+	@Autowired
 	public AuthenticationFilter(JWTutil jwtutil, FlightUserDetails userDetailsService) {
 		this.jwtutil = jwtutil;
 		this.userDetailsService = userDetailsService;
 	}
 
-
-
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String tokenHeader = request.getHeader("Authorization");
 		String jwttoken = null;
 		String userEmail = null;
-		
-		if(tokenHeader !=null && tokenHeader.startsWith("Bearer "))
-		{
+
+		if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
 			jwttoken = tokenHeader.substring(7);
-			try
-			{
-			userEmail = jwtutil.getUserNamefromToken(jwttoken);
-			}
-			catch(IllegalArgumentException e)
-			{
+			try {
+				userEmail = jwtutil.getUserNamefromToken(jwttoken);
+			} catch (IllegalArgumentException e) {
 				log.error("Unable to get JWT Token");
-			}
-			catch(ExpiredJwtException e)
-			{
+			} catch (ExpiredJwtException e) {
 				log.error("JWT Token has expired");
 			}
-			
+
 			UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
-			if(jwtutil.isValidToken(jwttoken, userDetails))
-			{
-				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(),userDetails.getAuthorities());
+			if (jwtutil.isValidToken(jwttoken, userDetails)) {
+				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+						userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
 				usernamePasswordAuthenticationToken
-				.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}
