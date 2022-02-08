@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.flightapp.admin.model.Airline;
 import com.flightapp.admin.service.AirlineService;
 import com.flightapp.admin.service.FlightService;
@@ -26,6 +25,7 @@ import com.flightapp.admin.ui.ApiResponse;
 import com.flightapp.admin.ui.CreateFlightDTO;
 import com.flightapp.admin.ui.FlightDTO;
 import com.flightapp.admin.ui.FlightSearchDTO;
+import com.flightapp.admin.ui.FlightUpdateDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -101,11 +101,13 @@ public class AirlineController {
 		return ResponseEntity.status(HttpStatus.OK).body(flightService.getFlightsByCriteria(flightSearchdto));
 	}
 
-	/*
-	 * @PutMapping("/updateschedule") public ResponseEntity<FlightDTO>
-	 * updateFlightSchedule(@RequestBody FlightDTO flightDTO) {
-	 * 
-	 * }
-	 */
+	
+	 @PutMapping("/updateschedule") 
+	 public ResponseEntity<ApiResponse> updateFlightSchedule(@RequestBody FlightUpdateDTO request) {
+		 flightService.updateschedule(request);
+		 return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Flight schedule was updated"));
+	  
+	 }
+	 
 
 }

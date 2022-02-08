@@ -1,6 +1,6 @@
 logging:
   file:
-    name: flight-booking.log
+    name: admin-activities-manager.log
 management:
   endpoints:
     web:
@@ -12,20 +12,18 @@ spring:
   application:
     name: admin-activites-manager
   datasource:
-    password: pass@word1
-    url: jdbc:mysql://localhost:3306/flightapp
-    username: root
+    password: password1
+    url: jdbc:mysql://flightapp.c8oyd2gnbiym.us-east-1.rds.amazonaws.com/flightapp
+    username: admin
    #driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  profiles:
+    active:
+    - staging  
 jwt:
   secret: access**access
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    preferIpAddress: true
+

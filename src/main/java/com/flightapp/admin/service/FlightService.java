@@ -26,6 +26,7 @@ import com.flightapp.admin.repository.SeatRepository;
 import com.flightapp.admin.ui.CreateFlightDTO;
 import com.flightapp.admin.ui.FlightDTO;
 import com.flightapp.admin.ui.FlightSearchDTO;
+import com.flightapp.admin.ui.FlightUpdateDTO;
 
 @Service
 public class FlightService {
@@ -97,6 +98,11 @@ public class FlightService {
 		List<FlightDTO> flightDTOlist = flightList.stream().map(flight -> modelMapper.map(flight, FlightDTO.class))
 				.collect(Collectors.toList());
 		return flightDTOlist;
+	}
+
+	@Transactional
+	public void updateschedule(FlightUpdateDTO request) {
+		flightRepository.updateEndDate(request.getFlightName(),request.getEndDate());
 	}
 
 }

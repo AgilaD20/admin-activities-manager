@@ -1,6 +1,7 @@
 package com.flightapp.admin.repository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +39,9 @@ public interface FlightRepository extends JpaRepository<Flight,Integer> {
 
 	@Query(value="select * from flight where fromlocation=:fromLocation and destination=:destination and airlineid=:airlineId", nativeQuery=true)
 	public List<Flight> getAllFlightsByCriteriaWithAirline(Integer airlineId, String fromLocation, String destination);
+
+	@Modifying
+	@Query(value="update flight set enddate=:endDate where flightname=:flightName", nativeQuery=true)
+	public void updateEndDate(String flightName, LocalDate endDate);
 
 }

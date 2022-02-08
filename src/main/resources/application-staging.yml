@@ -1,0 +1,26 @@
+logging:
+  file:
+    name: admin-activities-manager.log
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 8081
+spring:
+  application:
+    name: admin-activites-manager
+  datasource:
+    password: pass@word1
+    url: jdbc:mysql://localhost:3306/flightapp
+    username: root
+   #driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+jwt:
+  secret: access**access
+
